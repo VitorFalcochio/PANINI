@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panini — Notificação de Premiação</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap');
+
+    :root {
+      --yellow: #FFE600;
+      --red:    #CC0000;
+      --black:  #111111;
+      --white:  #ffffff;
+      --gray:   #f5f5f5;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: var(--yellow);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── HEADER ── */
+    header {
+      width: 100%;
+      background-color: var(--yellow);
+      border-bottom: 4px solid var(--black);
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header img {
+      height: 56px;
+    }
+
+    header nav {
+      display: flex;
+      gap: 28px;
+    }
+
+    header nav a {
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    header nav a:hover {
+      color: var(--red);
+    }
+
+    /* ── HERO BANNER ── */
+    .hero {
+      width: 100%;
+      background-color: var(--red);
+      border-bottom: 4px solid var(--black);
+      padding: 12px 40px;
+      text-align: center;
+    }
+
+    .hero p {
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--yellow);
+    }
+
+    /* ── MAIN CONTENT ── */
+    main {
+      width: 100%;
+      max-width: 780px;
+      padding: 48px 24px 64px;
+    }
+
+    /* ── CERTIFICATE CARD ── */
+    .certificate {
+      background: var(--white);
+      border: 3px solid var(--black);
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 6px 6px 0 var(--black);
+    }
+
+    .cert-header {
+      background-color: var(--red);
+      padding: 28px 40px 24px;
+      border-bottom: 3px solid var(--black);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .cert-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--yellow);
+      border: 3px solid var(--black);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .cert-header-text h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 4px;
+    }
+
+    .cert-header-text h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .cert-body {
+      padding: 40px;
+    }
+
+    .protocol-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--gray);
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      padding: 10px 16px;
+      margin-bottom: 32px;
+    }
+
+    .protocol-bar span {
+      font-size: 11px;
+      color: #666;
+      letter-spacing: 0.5px;
+    }
+
+    .protocol-bar strong {
+      font-family: 'Oswald', sans-serif;
+      font-size: 12px;
+      color: var(--black);
+      letter-spacing: 1px;
+    }
+
+    .cert-body p {
+      font-size: 15px;
+      color: #333;
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    .recipient-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--red);
+    }
+
+    /* ── PRIZE GRID ── */
+    .prize-section {
+      margin: 32px 0;
+      border-top: 2px solid #eee;
+      border-bottom: 2px solid #eee;
+      padding: 28px 0;
+    }
+
+    .prize-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 16px;
+    }
+
+    .prize-grid {
+      display: flex;
+      gap: 12px;
+    }
+
+    .pack {
+      flex: 1;
+      background: var(--yellow);
+      border: 2px solid var(--black);
+      border-radius: 6px;
+      padding: 20px 8px 16px;
+      text-align: center;
+      box-shadow: 3px 3px 0 var(--black);
+    }
+
+    .pack-number {
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--red);
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .pack-icon {
+      font-size: 32px;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .pack-tag {
+      background: var(--red);
+      color: var(--white);
+      font-family: 'Oswald', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 6px;
+      border-radius: 2px;
+    }
+
+    /* ── TOTAL BLOCK ── */
+    .total-block {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--black);
+      color: var(--white);
+      border-radius: 3px;
+      padding: 16px 24px;
+      margin-bottom: 32px;
+    }
+
+    .total-block p {
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: #ccc;
+      margin: 0;
+    }
+
+    .total-block strong {
+      font-family: 'Oswald', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--yellow);
+    }
+
+    /* ── CTA BUTTON ── */
+    .cta {
+      display: block;
+      width: 100%;
+      background: var(--red);
+      color: var(--white);
+      font-family: 'Oswald', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 18px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      box-shadow: 4px 4px 0 #8a0000;
+      transition: transform 0.1s, box-shadow 0.1s;
+    }
+
+    .cta:hover {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 #8a0000;
+    }
+
+    /* ── DISCLAIMER ── */
+    .disclaimer {
+      margin-top: 28px;
+      padding: 16px 40px;
+      background: #fffbea;
+      border-top: 2px dashed #e0c900;
+    }
+
+    .disclaimer p {
+      font-size: 11px;
+      color: #888;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      width: 100%;
+      background: var(--black);
+      border-top: 4px solid var(--red);
+      padding: 24px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+    }
+
+    footer p {
+      font-size: 11px;
+      color: #666;
+      letter-spacing: 0.5px;
+    }
+
+    footer img {
+      height: 28px;
+      opacity: 0.6;
+    }
+
+    /* ── MOBILE RESPONSIVENESS ── */
+    @media (max-width: 600px) {
+
+      /* Header: stack logo + nav verticalmente */
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 16px 20px;
+      }
+
+      header img {
+        height: 40px;
+      }
+
+      header nav {
+        flex-wrap: wrap;
+        gap: 12px 20px;
+      }
+
+      header nav a {
+        font-size: 12px;
+      }
+
+      /* Hero */
+      .hero {
+        padding: 10px 16px;
+      }
+
+      .hero p {
+        font-size: 11px;
+        letter-spacing: 1px;
+      }
+
+      /* Main */
+      main {
+        padding: 24px 12px 48px;
+      }
+
+      /* Cert header */
+      .cert-header {
+        padding: 20px 20px 18px;
+        gap: 14px;
+      }
+
+      .cert-header-text h1 {
+        font-size: 22px;
+      }
+
+      .cert-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 20px;
+      }
+
+      /* Cert body */
+      .cert-body {
+        padding: 24px 16px;
+      }
+
+      /* Protocol bar: stack itens */
+      .protocol-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        padding: 10px 12px;
+        margin-bottom: 24px;
+      }
+
+      /* Prize grid: 3 colunas na primeira linha, 2 na segunda */
+      .prize-grid {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .pack {
+        flex: 1 1 calc(33.333% - 10px);
+        min-width: 80px;
+        padding: 14px 6px 12px;
+      }
+
+      .pack-icon {
+        font-size: 26px;
+      }
+
+      /* Total block: stack verticalmente */
+      .total-block {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        padding: 14px 16px;
+        margin-bottom: 24px;
+      }
+
+      .total-block strong {
+        font-size: 24px;
+      }
+
+      /* CTA */
+      .cta {
+        font-size: 14px;
+        padding: 16px;
+      }
+
+      /* Disclaimer */
+      .disclaimer {
+        padding: 14px 16px;
+      }
+
+      /* Footer: stack verticalmente */
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 20px 20px;
+      }
+    }
+
+    /* Telas muito pequenas (≤ 380px) */
+    @media (max-width: 380px) {
+      .cert-header-text h1 {
+        font-size: 18px;
+      }
+
+      .pack {
+        flex: 1 1 calc(50% - 10px);
+      }
+
+      .protocol-bar strong {
+        font-size: 11px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <img src="panini-seeklogo.png" alt="Panini" />
+    <nav>
+      <a href="#">Álbuns</a>
+      <a href="#">Figurinhas</a>
+      <a href="#">Promoções</a>
+      <a href="#">Contato</a>
+    </nav>
+  </header>
+
+  <!-- HERO BANNER -->
+  <div class="hero">
+    <p>Programa de Fidelidade Panini &nbsp;|&nbsp; Notificação de Premiação</p>
+  </div>
+
+  <!-- MAIN -->
+  <main>
+    <div class="certificate">
+
+      <div class="cert-header">
+        <div class="cert-icon">🏆</div>
+        <div class="cert-header-text">
+          <h2>Notificação Oficial</h2>
+          <h1>Você foi premiado!</h1>
+        </div>
+      </div>
+
+      <div class="cert-body">
+
+        <div class="protocol-bar">
+          <span>Protocolo de premiação</span>
+          <strong>#PNI-2026-00847</strong>
+          <span>Data: 16 de maio de 2026</span>
+        </div>
+
+        <p>Prezado(a) <span class="recipient-name">Colecionador(a) Panini</span>,</p>
+
+        <p>
+          É com grande satisfação que informamos que você foi selecionado(a) como
+          um dos contemplados do nosso <strong>Programa de Fidelidade Panini 2026</strong>.
+          Após análise do histórico de participações, você foi premiado com os
+          seguintes itens:
+        </p>
+
+        <div class="prize-section">
+          <p class="prize-label">Itens premiados</p>
+          <div class="prize-grid">
+            <div class="pack">
+              <div class="pack-number">Nº 01</div>
+              <span class="pack-icon">🃏</span>
+              <div class="pack-tag">Pacotinho</div>
+            </div>
+            <div class="pack">
+              <div class="pack-number">Nº 02</div>
+              <span class="pack-icon">🃏</span>
+              <div class="pack-tag">Pacotinho</div>
+            </div>
+            <div class="pack">
+              <div class="pack-number">Nº 03</div>
+              <span class="pack-icon">🃏</span>
+              <div class="pack-tag">Pacotinho</div>
+            </div>
+            <div class="pack">
+              <div class="pack-number">Nº 04</div>
+              <span class="pack-icon">🃏</span>
+              <div class="pack-tag">Pacotinho</div>
+            </div>
+            <div class="pack">
+              <div class="pack-number">Nº 05</div>
+              <span class="pack-icon">🃏</span>
+              <div class="pack-tag">Pacotinho</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="total-block">
+          <p>Total de pacotinhos premiados</p>
+          <strong>5 Pacotinhos</strong>
+        </div>
+
+        <button class="cta">Resgate seu Prêmio na Banca</button>
+
+      </div>
+
+      <div class="disclaimer">
+        <p>
+         Página de venda autorizada pela Panini para divulgação do Programa de Fidelidade Panini 2026.
+         Os prêmios estão sujeitos à disponibilidade e podem variar conforme a região.
+         Consulte os termos e condições do programa para mais detalhes sobre elegibilidade e resgate.
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Panini — Todos os direitos reservados a Panini</p>
+    <img src="panini-seeklogo.png" alt="Panini" />
+  </footer>
+
+</body>
+</html>
